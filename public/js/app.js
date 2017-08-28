@@ -1,3 +1,16 @@
+var store = Ext.create('Ext.data.Store', {
+    model: 'User',
+    autoLoad: true,
+    proxy: {
+        type: 'ajax',
+        url: '/index/test/7',
+        reader: {
+            type: 'json',
+            root: 'users'
+        }
+    }
+});
+
 Ext.onReady(function () {
     Ext.create('Ext.Panel', {
         title: 'Count record',
@@ -24,17 +37,9 @@ Ext.onReady(function () {
                         text: 'Show',
                         enableToggle: true,
                         handler: function () {
-                            Ext.Ajax.request({
-                                url: '/index/test/'+Ext.getCmp('count').getValue(),
-                                disableCaching: false,
-                                success: function (res) {                                    
-                                    Ext.getCmp('grid').getView().refresh();
-                                    console.log(res);
-                                },
-                                failure: function () {
-                                    console.log('error');
-                                }
-                            });
+                            window.store.proxy.url = '/index/test/' + Ext.getCmp('count').getValue();
+                            Ext.getCmp('grid').getStore().reload();
+                            console.log(Ext.getCmp('grid').getView());
                         }
                     }]
             }],
@@ -46,44 +51,6 @@ Ext.onReady(function () {
 Ext.application({
     name: 'Fiddle',
     launch: function () {
-        Ext.define('User', {
-            extend: 'Ext.data.Model',
-
-            idProperty: 'userID',
-
-            fields: [{
-                    name: 'name',
-                    type: 'string'
-                }, {
-                    name: 'surname',
-                    type: 'string'
-                }, {
-                    name: 'age',
-                    type: 'int'
-                }, {
-                    name: 'level',
-                    type: 'int'
-                }, {
-                    name: 'parent_id',
-                    type: 'int'
-                }]
-        });
-
-        var store = Ext.create('Ext.data.Store', {
-            model: 'User',
-            autoLoad: true,
-            proxy: {
-                type: 'ajax',
-                url: '/index/test',
-                reader: {
-                    type: 'json',
-                    root: 'users'
-                }
-            }
-        });
-
-        console.log(store.proxy.reader);
-
         Ext.create('Ext.grid.Panel', {
             renderTo: Ext.getBody(),
             id: 'grid',
@@ -131,7 +98,7 @@ Ext.application({
                     xtype: 'actioncolumn',
                     width: 40,
                     items: [{
-                            icon: 'del.png',
+                            icon: 'img/del.png',
                             handler: function (grid, rowIndex, colIndex) {
                                 var selectionModel = grid.getSelectionModel(), record;
                                 selectionModel.select(rowIndex);

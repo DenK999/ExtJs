@@ -46,27 +46,4 @@ class User extends Model {
     public function initialize() {
         $this->setSource("users");
     }
-
-    /**
-     * 
-     */
-    public static function clearTable() {
-        $self = new self();
-        $self->getDi()->getShared('db')->query("truncate table " . $self->getSource());
-    }
-
-    /**
-     * 
-     * @param string $table
-     * @param array $rows
-     * @param string $filepath
-     */
-    public static function copyInFileToDB(array $rows, string $filepath) {
-        $self = new self();
-        $table = $self->getSource();
-        $rowString = implode(',', $rows);
-        $self->getDi()->getShared('db')->query("COPY $table($rowString) FROM '" .
-                $filepath . "' WITH DELIMITER ','");
-    }
-
 }

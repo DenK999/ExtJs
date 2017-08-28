@@ -8,19 +8,17 @@ class IndexController extends ControllerBase
         
     }
     
-    public function testAction(){        
+    public function testAction(){   
+        
         $count = (int)$this->dispatcher->getParam("count");
         
+        $count = $count?$count:10;
+        
         $this->view->disable();
-
        
         $response = new \Phalcon\Http\Response();
 
-        $array = [1, 2, 3];
-        
-        $count?array_push($array, $count):array_push($array, 1);
-        
-        $response->setContent(json_encode($array));
+        $response->setContent(json_encode(User::find(['limit' => $count])));
         return $response;
     }
 
