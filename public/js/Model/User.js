@@ -1,22 +1,22 @@
 Ext.define('User', {
-            extend: 'Ext.data.Model',
+    extend: 'Ext.data.Model',
 
-            idProperty: 'userID',
+    idProperty: 'userID',
 
-            fields: [{
-                    name: 'name',
-                    type: 'string'
-                }, {
-                    name: 'surname',
-                    type: 'string'
-                }, {
-                    name: 'age',
-                    type: 'int'
-                }, {
-                    name: 'level',
-                    type: 'int'
-                }, {
-                    name: 'parent_id',
-                    type: 'int'
-                }]
-        });
+    fields: [{
+            name: 'name',
+            type: 'string'
+        }, {
+            name: 'surname',
+            type: 'string'
+        }, {
+            name: 'age',
+            type: 'int'
+        }, {
+            name: 'level',
+            type: 'int'
+        }, {
+            name: 'parent_id',
+            type: 'int'
+        }]
+});

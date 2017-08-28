@@ -55,7 +55,7 @@ Ext.application({
             renderTo: Ext.getBody(),
             id: 'grid',
             store: store,
-            height: 960,
+            height: 840,
             title: 'Test Grid',
             plugins: [{
                     ptype: 'rowediting',
@@ -82,10 +82,7 @@ Ext.application({
                 }, {
                     header: 'Age',
                     dataIndex: 'age',
-                    editor: {
-                        xtype: 'textfield',
-                        allowBlank: false
-                    }
+                    
                 }, {
                     header: 'Level',
                     dataIndex: 'level',
@@ -103,8 +100,36 @@ Ext.application({
                                 var selectionModel = grid.getSelectionModel(), record;
                                 selectionModel.select(rowIndex);
                                 record = selectionModel.getSelection()[0];
-                                alert('Do you want delete: ' + record.get('name'));
-                                store.removeAt(rowIndex);
+
+                                Ext.MessageBox.show({
+                                    title: 'Delete record',
+                                    msg: 'Do you want delete: ' + record.get('id'),
+                                    buttons: Ext.MessageBox.OKCANCEL,
+                                    icon: Ext.MessageBox.QUESTION,
+                                    fn: function (btn) {
+                                        if (btn == 'ok') {
+                                            Ext.Ajax.request({
+                                                url: '/index/delete/' + record.get('id'),
+                                                disableCaching: false,
+                                                success: function (res) {
+                                                    Ext.MessageBox.show({
+                                                        title: 'Deleting record',
+                                                        msg: res.responseText,
+                                                        buttons: Ext.MessageBox.OK,
+                                                        icon: Ext.MessageBox.INFO,
+                                                        fn: function(){
+                                                            store.removeAt(rowIndex);
+                                                        }
+                                                    });                                                    
+                                                },
+                                                failure: function () {
+                                                    console.log('error');
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+                                );
                             }
                         }]
                 }]

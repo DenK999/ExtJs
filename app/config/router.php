@@ -10,4 +10,8 @@ $router->add(
             'count'       => 1            
         ]);
 
+$router->add(
+        'index/delete/{id}',
+        "Index::delete");
+
 $router->handle();
