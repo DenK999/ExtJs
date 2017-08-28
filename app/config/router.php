@@ -2,12 +2,12 @@
 
 $router = $di->getRouter();
 
-$router->addGet(
-        '/generate/generate/([0-9]{1})',
+$router->add(
+        '/index/test/([0-9]*)',
         [
-            'controller' => 'generate',
-            'action'     => 'generate',
-            'step'       => 1
+            'controller' => 'index',
+            'action'     => 'test',
+            'count'       => 1            
         ]);
 
 $router->handle();
