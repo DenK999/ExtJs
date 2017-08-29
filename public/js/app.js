@@ -3,13 +3,16 @@ var store = Ext.create('Ext.data.Store', {
     autoLoad: true,
     proxy: {
         type: 'ajax',
-        url: '/index/test/7',
+        url: '/index/test',
         reader: {
             type: 'json',
             root: 'users'
         }
     }
 });
+
+Ext.form.VTypes["phone"] = /^(\d{3}[-]?){1,2}(\d{4})$/;
+
 
 Ext.onReady(function () {
     Ext.create('Ext.Panel', {
@@ -39,7 +42,91 @@ Ext.onReady(function () {
                         handler: function () {
                             window.store.proxy.url = '/index/test/' + Ext.getCmp('count').getValue();
                             Ext.getCmp('grid').getStore().reload();
-                            console.log(Ext.getCmp('grid').getView());
+                        }
+                    }]
+            }, {
+                items: [{
+                        xtype: 'button',
+                        text: 'New User',
+                        enableToggle: true,
+                        handler: function () {
+                            var formAdd = Ext.create('Ext.form.Panel', {
+                                xtype: 'formpanel',
+                                title: 'Add User',
+                                width: 300,
+                                height: 280,
+                                floating: true,
+                                centered: true,
+                                closable: false,
+                                modal: true,
+                                buttons: [{
+                                        text: 'Create User',
+                                        iconCls: 'x-fa fa-check',
+                                        handler: function () {                                            
+                                            Ext.Ajax.request({
+                                                url: '/index/create/',
+                                                method: 'POST',
+                                                params:
+                                                        {
+                                                            userData: Ext.JSON.encode(formAdd.getValues())
+                                                        },
+                                                success: function (response) {
+                                                    Ext.MessageBox.show({
+                                                        title: 'Add User',
+                                                        width: 1000,
+                                                        msg: response.responseText,
+                                                        buttons: Ext.MessageBox.OK,
+                                                        icon: Ext.MessageBox.INFO
+                                                    });
+                                                }
+                                            });
+
+                                            formAdd.close();
+                                        }
+                                    }, {
+                                        text: 'Cancel',
+                                        iconCls: 'x-fa fa-close',
+                                        handler: function () {
+                                            formAdd.close();
+                                        }
+                                    }],                                
+                        items: [{
+                                xtype: 'textfield',
+                                name: 'name',
+                                fieldLabel: 'Name',
+                                margin: '20 0 0 10',
+                                vtype:'phone'
+
+                            }, {
+                                xtype: 'textfield',
+                                name: 'surname',
+                                fieldLabel: 'Surname',
+                                margin: '10 0 0 10',
+                                vtype:'alpha'
+
+                            }, {
+                                xtype: 'textfield',
+                                name: 'age',
+                                fieldLabel: 'Age',
+                                margin: '10 0 0 10'
+
+                            }, {
+                                xtype: 'textfield',
+                                name: 'level',
+                                fieldLabel: 'Level',
+                                margin: '10 0 0 10'
+
+                            }, {
+                                xtype: 'textfield',
+                                name: 'parent_id',
+                                fieldLabel: 'Parent id',
+                                margin: '10 0 0 10'
+
+                            }]
+                                
+
+                            })
+                            formAdd.show();
                         }
                     }]
             }],
@@ -57,10 +144,84 @@ Ext.application({
             store: store,
             height: 840,
             title: 'Test Grid',
-            plugins: [{
-                    ptype: 'rowediting',
-                    clicksToEdit: 2
-                }],
+            listeners: {
+                itemdblclick: function (view, record) {
+                    var f = Ext.create('Ext.form.Panel', {
+                        xtype: 'formpanel',
+                        title: 'Update Record',
+                        width: 300,
+                        height: 280,
+                        floating: true,
+                        centered: true,
+                        modal: true,
+                        buttons: [{
+                                text: 'Update',
+                                iconCls: 'x-fa fa-check',
+                                handler: function () {
+                                    f.updateRecord(record);
+                                    Ext.Ajax.request({
+                                        url: '/index/update/',
+                                        method: 'POST',
+                                        params:
+                                                {
+                                                    userData: Ext.JSON.encode(record.data)
+                                                },
+                                        success: function (response) {
+                                            Ext.MessageBox.show({
+                                                title: 'Update record',
+                                                msg: response.responseText,
+                                                buttons: Ext.MessageBox.OK,
+                                                icon: Ext.MessageBox.INFO
+                                            });
+                                        }
+                                    });
+
+                                    f.close();
+                                }
+                            }, {
+                                text: 'Cancel',
+                                iconCls: 'x-fa fa-close',
+                                handler: function () {
+                                    f.close();
+                                }
+                            }],
+                        items: [{
+                                xtype: 'textfield',
+                                name: 'name',
+                                fieldLabel: 'Name',
+                                margin: '20 0 0 10',
+                                vtype:'alpha'
+
+                            }, {
+                                xtype: 'textfield',
+                                name: 'surname',
+                                fieldLabel: 'Surname',
+                                margin: '10 0 0 10'
+
+                            }, {
+                                xtype: 'textfield',
+                                name: 'age',
+                                fieldLabel: 'Age',
+                                margin: '10 0 0 10'
+
+                            }, {
+                                xtype: 'textfield',
+                                name: 'level',
+                                fieldLabel: 'Level',
+                                margin: '10 0 0 10'
+
+                            }, {
+                                xtype: 'textfield',
+                                name: 'parent_id',
+                                fieldLabel: 'Parent id',
+                                margin: '10 0 0 10'
+
+                            }]
+                    })
+                    f.show();
+                    f.loadRecord(record);
+                }
+            },
             seltype: 'rowModel',
             dockedItems: [{
                     xtype: 'pagingtoolbar',
@@ -72,17 +233,30 @@ Ext.application({
                     displayMsg: 'Users {0} - {1} from {2}'
                 }],
             columns: [{
-                    xtype: 'rownumberer'
+                    xtype: 'rownumberer',
+                    width: 50
+                }, {
+                    header: 'ID',
+                    dataIndex: 'id',
+                    flex: 1,
+
                 }, {
                     text: 'Name',
                     xtype: 'templatecolumn',
                     flex: 1,
                     dataIndex: 'name',
-                    tpl: '<b>{name} {surname}</b>'
+                    tpl: '<b>{name}</b>'
+                }, {
+                    header: 'Surname',
+                    xtype: 'templatecolumn',
+                    flex: 1,
+                    dataIndex: 'surname',
+                    tpl: '<b>{surname}</b>'
                 }, {
                     header: 'Age',
                     dataIndex: 'age',
-                    
+                    flex: 1,
+
                 }, {
                     header: 'Level',
                     dataIndex: 'level',
@@ -111,16 +285,16 @@ Ext.application({
                                             Ext.Ajax.request({
                                                 url: '/index/delete/' + record.get('id'),
                                                 disableCaching: false,
-                                                success: function (res) {
+                                                success: function (response) {
                                                     Ext.MessageBox.show({
                                                         title: 'Deleting record',
-                                                        msg: res.responseText,
+                                                        msg: response.responseText,
                                                         buttons: Ext.MessageBox.OK,
                                                         icon: Ext.MessageBox.INFO,
-                                                        fn: function(){
+                                                        fn: function () {
                                                             store.removeAt(rowIndex);
                                                         }
-                                                    });                                                    
+                                                    });
                                                 },
                                                 failure: function () {
                                                     console.log('error');

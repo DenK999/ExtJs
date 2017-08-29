@@ -46,4 +46,9 @@ class User extends Model {
     public function initialize() {
         $this->setSource("users");
     }
+    
+    public function getSequenceName()
+    {
+        return "user_ids";
+    }
 }

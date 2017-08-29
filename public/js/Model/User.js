@@ -1,4 +1,4 @@
-Ext.define('User', {
+Ext.define('Models.User', {
     extend: 'Ext.data.Model',
 
     idProperty: 'userID',
