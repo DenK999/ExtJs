@@ -11,8 +11,16 @@ var store = Ext.create('Ext.data.Store', {
     }
 });
 
-Ext.form.VTypes["phone"] = /^(\d{3}[-]?){1,2}(\d{4})$/;
+var numberVType = {
+    number: function (val, field) {
+        var numberRegex = /^\d{1,2}$/;
+        return numberRegex.test(val);
+    },
+    numberText: 'Should be one or two digits',
+    numberMask: /[\d]/
+};
 
+Ext.apply(Ext.form.field.VTypes, numberVType);
 
 Ext.onReady(function () {
     Ext.create('Ext.Panel', {
@@ -54,7 +62,7 @@ Ext.onReady(function () {
                                 xtype: 'formpanel',
                                 title: 'Add User',
                                 width: 300,
-                                height: 280,
+                                height: 200,
                                 floating: true,
                                 centered: true,
                                 closable: false,
@@ -62,7 +70,7 @@ Ext.onReady(function () {
                                 buttons: [{
                                         text: 'Create User',
                                         iconCls: 'x-fa fa-check',
-                                        handler: function () {                                            
+                                        handler: function () {
                                             Ext.Ajax.request({
                                                 url: '/index/create/',
                                                 method: 'POST',
@@ -89,41 +97,29 @@ Ext.onReady(function () {
                                         handler: function () {
                                             formAdd.close();
                                         }
-                                    }],                                
-                        items: [{
-                                xtype: 'textfield',
-                                name: 'name',
-                                fieldLabel: 'Name',
-                                margin: '20 0 0 10',
-                                vtype:'phone'
+                                    }],
+                                items: [{
+                                        xtype: 'textfield',
+                                        name: 'name',
+                                        fieldLabel: 'Name',
+                                        margin: '20 0 0 10',
+                                        vtype: 'alpha'
 
-                            }, {
-                                xtype: 'textfield',
-                                name: 'surname',
-                                fieldLabel: 'Surname',
-                                margin: '10 0 0 10',
-                                vtype:'alpha'
+                                    }, {
+                                        xtype: 'textfield',
+                                        name: 'surname',
+                                        fieldLabel: 'Surname',
+                                        margin: '10 0 0 10',
+                                        vtype: 'alpha'
 
-                            }, {
-                                xtype: 'textfield',
-                                name: 'age',
-                                fieldLabel: 'Age',
-                                margin: '10 0 0 10'
+                                    }, {
+                                        xtype: 'textfield',
+                                        name: 'age',
+                                        fieldLabel: 'Age',
+                                        margin: '10 0 0 10',
+                                        vtype: 'number'
 
-                            }, {
-                                xtype: 'textfield',
-                                name: 'level',
-                                fieldLabel: 'Level',
-                                margin: '10 0 0 10'
-
-                            }, {
-                                xtype: 'textfield',
-                                name: 'parent_id',
-                                fieldLabel: 'Parent id',
-                                margin: '10 0 0 10'
-
-                            }]
-                                
+                                    }]
 
                             })
                             formAdd.show();
@@ -136,7 +132,7 @@ Ext.onReady(function () {
 });
 
 Ext.application({
-    name: 'Fiddle',
+    name: 'UserList',
     launch: function () {
         Ext.create('Ext.grid.Panel', {
             renderTo: Ext.getBody(),
@@ -190,31 +186,35 @@ Ext.application({
                                 name: 'name',
                                 fieldLabel: 'Name',
                                 margin: '20 0 0 10',
-                                vtype:'alpha'
+                                vtype: 'alpha'
 
                             }, {
                                 xtype: 'textfield',
                                 name: 'surname',
                                 fieldLabel: 'Surname',
-                                margin: '10 0 0 10'
+                                margin: '10 0 0 10',
+                                vtype: 'alpha'
 
                             }, {
                                 xtype: 'textfield',
                                 name: 'age',
                                 fieldLabel: 'Age',
-                                margin: '10 0 0 10'
+                                margin: '10 0 0 10',
+                                vtype: 'number'
 
                             }, {
                                 xtype: 'textfield',
                                 name: 'level',
                                 fieldLabel: 'Level',
-                                margin: '10 0 0 10'
+                                margin: '10 0 0 10',
+                                vtype: 'number'
 
                             }, {
                                 xtype: 'textfield',
                                 name: 'parent_id',
                                 fieldLabel: 'Parent id',
-                                margin: '10 0 0 10'
+                                margin: '10 0 0 10',
+                                vtype: 'number'
 
                             }]
                     })

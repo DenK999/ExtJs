@@ -1,22 +1,24 @@
-Ext.define('User', {
+Ext.define('LibraryExt.model.Book', {
     extend: 'Ext.data.Model',
 
-    idProperty: 'userID',
+    idProperty: 'BookID',
 
     fields: [{
-            name: 'name',
+            name: 'title',
             type: 'string'
         }, {
-            name: 'surname',
+            name: 'author',
             type: 'string'
         }, {
-            name: 'age',
+            name: 'price',
+            type: 'int'
+        },{
+            name: 'year',
             type: 'int'
         }, {
-            name: 'level',
-            type: 'int'
-        }, {
-            name: 'parent_id',
+            name: 'rating',
             type: 'int'
         }]
 });
+
+

@@ -12,8 +12,8 @@
         <script type="text/javascript" src="http://cdn.sencha.com/ext/gpl/5.0.0/build/ext-all.js"></script>
         <script type="text/javascript" src="http://cdn.sencha.com/ext/gpl/5.0.0/build/packages/ext-theme-neptune/build/ext-theme-neptune.js"></script>
 
-        <script type ="text/javascript" src="js/Model/User.js"></script>
-        <script type ="text/javascript" src="js/app.js"></script>
+      
+        <script type ="text/javascript" src="bootstrap.js"></script>
     </head>
     <body>
         <div class="container">
