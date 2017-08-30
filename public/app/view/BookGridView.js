@@ -53,33 +53,7 @@ Ext.define('LibraryExt.view.BookGridView', {
             sortable: true,
             dataIndex: 'rating'
         }],
-    plugins: [
-        Ext.create('Ext.grid.plugin.RowEditing', {
-            clicksToEdit: 2,
-            saveBtnText: 'Save',
-            cancelBtnText: 'Cancel'
-        })
-    ],
-    selType: 'rowmodel',
-    dockedItems: [
-        {
-            xtype: 'toolbar',
-            items: [
-                {
-                    text: 'Add',
-                    action: 'add',
-                    iconCls: 'icon-add'
-                },
-                '-',
-                {
-                    action: 'delete',
-                    text: 'Delete',
-                    iconCls: 'icon-delete',
-                    disabled: true
-                }
-            ]
-        }
-    ]
+    selType: 'rowmodel'    
 });
 
 

@@ -2,7 +2,9 @@ Ext.application({
     name: 'LibraryExt',
     
     views:[
-      'BookGridView',
+      'BookGridView',      
+      'BookAddPanel',
+      'AddBookView',
       'BookCatalogView'
     ],
     

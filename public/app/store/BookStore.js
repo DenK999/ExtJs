@@ -7,8 +7,8 @@ Ext.define('LibraryExt.store.BookStore', {
     autoLoad: true,
     
     proxy: {
-        type: 'ajax',
-        url: 'test.json',
+        type: 'ajax',        
+        url: 'index/test',
         reader: {
             type: 'json',
             root: 'users'

@@ -1,7 +1,61 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+Ext.define('LibraryExt.view.AddBookView', {
+    extend: 'Ext.form.Panel',
+    alias: 'widget.addBookView',
+    xtype: 'formpanel',
+    title: 'Add User',
+    width: 300,
+    height: 280,
+    floating: true,
+    centered: true,
+    closable: false,
+    modal: true,
+    buttons: [{
+            text: 'New Book',
+            handler: function () {
 
 
+                Ext.WindowManager.getActive().close();
+            }
+        }, {
+            text: 'Cancel',            
+            handler: function () {
+                Ext.WindowManager.getActive().close();
+            }
+        }],
+    items: [{
+            xtype: 'textfield',
+            name: 'title',
+            fieldLabel: 'Title',
+            margin: '20 0 0 10',
+            vtype: 'alpha'
+
+        }, {
+            xtype: 'textfield',
+            name: 'author',
+            fieldLabel: 'Author',
+            margin: '10 0 0 10',
+            vtype: 'alpha'
+
+        }, {
+            xtype: 'textfield',
+            name: 'price',
+            fieldLabel: 'Price',
+            margin: '10 0 0 10',
+            //vtype: 'number'
+
+        }, {
+            xtype: 'textfield',
+            name: 'year',
+            fieldLabel: 'Year',
+            margin: '10 0 0 10',
+            //vtype: 'number'
+
+        }, {
+            xtype: 'textfield',
+            name: 'rating',
+            fieldLabel: 'Rating',
+            margin: '10 0 0 10',
+            //vtype: 'number'
+
+        }]
+});

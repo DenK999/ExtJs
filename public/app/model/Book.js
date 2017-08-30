@@ -1,9 +1,10 @@
 Ext.define('LibraryExt.model.Book', {
     extend: 'Ext.data.Model',
-
-    idProperty: 'BookID',
-
+        
     fields: [{
+            name: 'id',
+            type: 'int'
+        },{
             name: 'title',
             type: 'string'
         }, {

@@ -1,16 +1,3 @@
-var store = Ext.create('Ext.data.Store', {
-    model: 'User',
-    autoLoad: true,
-    proxy: {
-        type: 'ajax',
-        url: '/index/test',
-        reader: {
-            type: 'json',
-            root: 'users'
-        }
-    }
-});
-
 var numberVType = {
     number: function (val, field) {
         var numberRegex = /^\d{1,2}$/;

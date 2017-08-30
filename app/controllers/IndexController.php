@@ -10,13 +10,13 @@ class IndexController extends ControllerBase {
 
         $count = (int) $this->dispatcher->getParam("count");
 
-        $count = $count ? $count : 20;
+        $count = $count ? $count : 10;
 
         $this->view->disable();
 
         $response = new \Phalcon\Http\Response();
 
-        $response->setContent(json_encode(User::find(['order' => "id",
+        $response->setContent(json_encode(Book::find(['order' => "id",
                             'limit' => $count])));
         return $response;
     }
