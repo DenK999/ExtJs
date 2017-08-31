@@ -4,6 +4,7 @@ Ext.define('LibraryExt.view.BookGridView', {
     width: 400,
     height: 300,
     frame: true,
+    itemId: 'myGrid',
     store: 'BookStore',
     iconCls: 'icon-user',
     viewConfig: {
@@ -14,46 +15,41 @@ Ext.define('LibraryExt.view.BookGridView', {
             text: 'Title',
             flex: 1,
             sortable: true,
-            dataIndex: 'title',
-            editor: {
-                xtype: 'textfield',
-                allowBlank: false,
-                blankText: 'Test'
-            }
-        },{
+            dataIndex: 'title'
+        }, {
             text: 'Author',
             flex: 1,
             sortable: true,
-            dataIndex: 'author',
-            editor: {
-                xtype: 'textfield',
-                allowBlank: false,
-                blankText: 'Test2'
-            }
-        },{
-            flex: 2,
+            dataIndex: 'author'
+        }, {
+            flex: 1,
             text: 'Price',
             sortable: true,
-            dataIndex: 'price',
-            editor: {
-                xtype: 'textfield',
-                regex: /^([0-9]{1,20})*$/,
-                regexText: 'Test3',
-                allowBlank: false,
-                blankText: 'Requaired'
-            }
-        },{
-            flex: 2,
+            dataIndex: 'price'
+        }, {
+            flex: 1,
             text: 'Year',
             sortable: true,
             dataIndex: 'year'
-        },{
-            flex: 2,
+        }, {
+            flex: 1,
             text: 'Rating',
             sortable: true,
             dataIndex: 'rating'
+        }, {
+            xtype: 'actioncolumn',
+            width: 50,
+            text: 'Action',
+            action: 'deleteRow',
+            items: [{
+                    icon: 'img/del.png',
+                    action: 'deleteRow',
+                    handler: function (grid, rowIndex) {                       
+                        this.fireEvent('click', arguments);
+                    }
+                }]
         }],
-    selType: 'rowmodel'    
+    selType: 'rowmodel'
 });
 
 

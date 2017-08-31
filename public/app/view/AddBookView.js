@@ -11,16 +11,10 @@ Ext.define('LibraryExt.view.AddBookView', {
     modal: true,
     buttons: [{
             text: 'New Book',
-            handler: function () {
-
-
-                Ext.WindowManager.getActive().close();
-            }
+            action: 'addBook'            
         }, {
             text: 'Cancel',            
-            handler: function () {
-                Ext.WindowManager.getActive().close();
-            }
+            action: 'close'
         }],
     items: [{
             xtype: 'textfield',
