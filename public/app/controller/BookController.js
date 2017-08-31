@@ -13,7 +13,7 @@ Ext.define('LibraryExt.controller.BookController', {
                 click: 'addNewBook'
             },
             'button[action=close]': {
-                click: 'addNewBook'
+                click: 'closeActiveWindow'
             },
             '#myGrid actioncolumn': {
                 click: 'deleteRow'
@@ -21,9 +21,13 @@ Ext.define('LibraryExt.controller.BookController', {
         });
     },
 
+    reloadGrid: function () {
+        Ext.widget('bookGridView').getStore().reload();
+    },
+
     showCountGrid: function () {
         Ext.getStore('BookStore').proxy.url = 'index/test/' + Ext.getCmp('count').getValue();
-        Ext.widget('bookGridView').getStore().reload();
+        this.reloadGrid();
     },
 
     showViewNewBook: function () {
@@ -64,13 +68,32 @@ Ext.define('LibraryExt.controller.BookController', {
             }
         });
     },
-    
-    closeActiveWindow: function(){
+
+    closeActiveWindow: function () {
         Ext.WindowManager.getActive().close();
     },
-    
-    addNewBook:function(){
-        console.log("Test");
+
+    addNewBook: function (view, record) {
+        var bookDataArray = Ext.getCmp('addNewBookForm').getValues();
+        Ext.Ajax.request({
+            url: '/index/create/',
+            method: 'POST',
+            params:
+                    {
+                        bookData: Ext.JSON.encode(bookDataArray)
+                    },
+            success: function (response) {
+                Ext.MessageBox.show({
+                    title: 'Add User',
+                    width: 1000,
+                    msg: response.responseText,
+                    buttons: Ext.MessageBox.OK,
+                    icon: Ext.MessageBox.INFO
+                });
+            }
+        });
+
+        this.reloadGrid();
         this.closeActiveWindow();
     }
 

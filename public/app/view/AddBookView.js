@@ -2,6 +2,7 @@ Ext.define('LibraryExt.view.AddBookView', {
     extend: 'Ext.form.Panel',
     alias: 'widget.addBookView',
     xtype: 'formpanel',
+    id: 'addNewBookForm',
     title: 'Add User',
     width: 300,
     height: 280,

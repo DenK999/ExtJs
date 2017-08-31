@@ -50,17 +50,17 @@ class IndexController extends ControllerBase {
 //        }
 //    }
 //
-//    public function createAction() {
-//        
-//        $user = new User();
-//        
-//        $userData = (array) json_decode($_POST['userData']);
-//        
-//        foreach ($userData as $key => $value) {
-//            $user->$key = $userData[$key];
-//        }    
-//        $user->create();
-//        return "User with name: " . $user->name . " created";
-//    }
+    public function createAction() {
+        
+        $book = new Book();
+        
+        $bookData = (array) json_decode($_POST['bookData']);
+        
+        foreach ($bookData as $key => $value) {
+            $book->$key = $bookData[$key];
+        }    
+        $book->create();
+        return "Book title: " . $book->title . " created";
+    }
 
 }
