@@ -1,10 +1,10 @@
 Ext.define('LibraryExt.model.Book', {
     extend: 'Ext.data.Model',
-        
+
     fields: [{
             name: 'id',
             type: 'int'
-        },{
+        }, {
             name: 'title',
             type: 'string'
         }, {
@@ -13,7 +13,7 @@ Ext.define('LibraryExt.model.Book', {
         }, {
             name: 'price',
             type: 'int'
-        },{
+        }, {
             name: 'year',
             type: 'int'
         }, {
@@ -21,12 +21,13 @@ Ext.define('LibraryExt.model.Book', {
             type: 'int'
         }],
     proxy: {
-        type: 'ajax',        
+        type: 'ajax',
         url: 'index/test',
-        reader: {
-            type: 'json',
-            root: 'users'
-        }
+//        reader: {
+//            type: 'json',
+//            root: 'users',
+//           
+//        }
     }
 });
 

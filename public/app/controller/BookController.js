@@ -28,7 +28,7 @@ Ext.define('LibraryExt.controller.BookController', {
         var store = Ext.getCmp('myGrid').getStore();
         store.proxy.url = 'index/test/' + Ext.getCmp('count').getValue();
         store.reload();
-        
+
     },
 
     showViewNewBook: function () {
@@ -92,7 +92,7 @@ Ext.define('LibraryExt.controller.BookController', {
             params: {
                 bookData: Ext.JSON.encode(bookDataArray)
             },
-            success: function (response) {               
+            success: function (response) {
                 Ext.MessageBox.show({
                     title: 'Save book',
                     width: 1000,
@@ -102,7 +102,7 @@ Ext.define('LibraryExt.controller.BookController', {
                 });
             }
         });
-        
+
         this.closeActiveWindow();
         Ext.getCmp('myGrid').getStore().reload();
     },
