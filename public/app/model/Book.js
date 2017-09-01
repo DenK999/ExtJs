@@ -19,7 +19,15 @@ Ext.define('LibraryExt.model.Book', {
         }, {
             name: 'rating',
             type: 'int'
-        }]
+        }],
+    proxy: {
+        type: 'ajax',        
+        url: 'index/test',
+        reader: {
+            type: 'json',
+            root: 'users'
+        }
+    }
 });
 
 

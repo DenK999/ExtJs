@@ -25,42 +25,55 @@ class IndexController extends ControllerBase {
         $book = Book::findFirst($id);
         if ($book !== false) {
             if ($book->delete() === false) {
-                return "User with id: " . $book->title . "don\'t delete";
+                return "User with title: " . $book->title . "don\'t delete";
             } else {
                 return "User with id: " . $book->title . " deleted";
             }
         }
     }
 
-//    public function updateAction() {
-//
-//        $userData = (array) json_decode($_POST['userData']);
-//        var_dump($userData);
-//        die;
-//
-//        $user = User::findFirst($userData['id']);
-//        if ($user !== false) {
-//            foreach ($userData as $key => $value) {
-//                $user->$key = $userData[$key];
-//            }
-//            $user->update();
-//            return "User with id: " . $user->id . " editing";
-//        } else {
-//            return "User with id: " . $user->id . " don\'t editing";
-//        }
-//    }
-//
-    public function createAction() {
-        
-        $book = new Book();
-        
+    public function saveAction() {
+
         $bookData = (array) json_decode($_POST['bookData']);
+        if ($bookData['id'] == "") {
+            return $this->createBook($bookData);
+        } else {
+            return $this->updateBook($bookData);
+        }
+    }
+
+    public function updateBook($bookData) {
         
-        foreach ($bookData as $key => $value) {
-            $book->$key = $bookData[$key];
-        }    
-        $book->create();
-        return "Book title: " . $book->title . " created";
+        try {
+            $book = Book::findFirst($bookData['id']);
+            if ($book !== false) {
+                foreach ($bookData as $key => $value) {
+                    $book->$key = $bookData[$key];
+                }
+                $book->update();
+                return "Book with title: " . $book->title . " updating";
+            } else {
+                return "Book with title: " . $book->title . " don\'t updating";
+            }
+        } catch (Exception $ex) {
+            return "Book don`t update";
+        }
+    }
+
+    public function createBook($bookData) {
+
+        try {
+            $book = new Book();
+            $bookData = (array) json_decode($_POST['bookData']);
+            foreach ($bookData as $key => $value) {
+                $book->$key = $bookData[$key];
+            }
+            $book->create();
+            return "Book title: " . $book->title . " created";
+        } catch (Exception $ex) {
+
+            return "Book don`t create";
+        }
     }
 
 }

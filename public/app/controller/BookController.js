@@ -9,29 +9,40 @@ Ext.define('LibraryExt.controller.BookController', {
             'button[action=newBook]': {
                 click: 'showViewNewBook'
             },
-            'button[action=addBook]': {
-                click: 'addNewBook'
+            'button[action=saveBook]': {
+                click: 'saveBook'
             },
             'button[action=close]': {
                 click: 'closeActiveWindow'
             },
             '#myGrid actioncolumn': {
                 click: 'deleteRow'
+            },
+            '#myGrid': {
+                beforeitemdblclick: 'updateRow'
             }
         });
     },
 
-    reloadGrid: function () {
-        Ext.widget('bookGridView').getStore().reload();
-    },
-
     showCountGrid: function () {
-        Ext.getStore('BookStore').proxy.url = 'index/test/' + Ext.getCmp('count').getValue();
-        this.reloadGrid();
+        var store = Ext.getCmp('myGrid').getStore();
+        store.proxy.url = 'index/test/' + Ext.getCmp('count').getValue();
+        store.reload();
+        
     },
 
     showViewNewBook: function () {
-        Ext.widget('addBookView').show();
+        Ext.create('Ext.container.Viewport', {
+            xtype: 'savebookform',
+            width: 400,
+            viewModel: {
+                data: {
+                    title: 'New book',
+                    book: ''
+                }
+            }
+        });
+        Ext.widget('saveBookView').show();
     },
 
     deleteRow: function (arguments) {
@@ -55,8 +66,8 @@ Ext.define('LibraryExt.controller.BookController', {
                                 buttons: Ext.MessageBox.OK,
                                 icon: Ext.MessageBox.INFO,
                                 fn: function () {
-                                    Ext.getStore('BookStore').removeAt(arguments[1]);
-                                    Ext.widget('bookGridView').getStore().reload();
+                                    Ext.getCmp('myGrid').getStore().removeAt(arguments[1]);
+                                    Ext.getCmp('myGrid').getStore().reload();
                                 }
                             });
                         },
@@ -73,18 +84,17 @@ Ext.define('LibraryExt.controller.BookController', {
         Ext.WindowManager.getActive().close();
     },
 
-    addNewBook: function (view, record) {
-        var bookDataArray = Ext.getCmp('addNewBookForm').getValues();
+    saveBook: function (view, record) {
+        var bookDataArray = Ext.getCmp('savebookform').getForm().getValues();
         Ext.Ajax.request({
-            url: '/index/create/',
+            url: '/index/save/',
             method: 'POST',
-            params:
-                    {
-                        bookData: Ext.JSON.encode(bookDataArray)
-                    },
-            success: function (response) {
+            params: {
+                bookData: Ext.JSON.encode(bookDataArray)
+            },
+            success: function (response) {               
                 Ext.MessageBox.show({
-                    title: 'Add User',
+                    title: 'Save book',
                     width: 1000,
                     msg: response.responseText,
                     buttons: Ext.MessageBox.OK,
@@ -92,9 +102,25 @@ Ext.define('LibraryExt.controller.BookController', {
                 });
             }
         });
-
-        this.reloadGrid();
+        
         this.closeActiveWindow();
-    }
+        Ext.getCmp('myGrid').getStore().reload();
+    },
 
+    updateRow: function (view, record, index, item) {
+
+        Ext.create('Ext.container.Viewport', {
+            xtype: 'savebookform',
+            width: 400,
+            record: record,
+            viewModel: {
+                data: {
+                    title: 'Update book',
+                    book: record
+                }
+            }
+        });
+        Ext.widget('saveBookView').show();
+
+    }
 });

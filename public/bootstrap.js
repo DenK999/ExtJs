@@ -11,10 +11,7 @@ Ext.application({
     controllers : [
         'BookController'
     ],
-
-    stores : [
-        'BookStore'
-    ],
+    
     
     launch: function () {
         Ext.create('Ext.container.Viewport', {
@@ -22,6 +19,6 @@ Ext.application({
             items: {
                 xtype: 'bookCatalogView'
             }
-        });
+        });        
     }
 });

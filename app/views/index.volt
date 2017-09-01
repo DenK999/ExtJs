@@ -7,10 +7,10 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Phalcon PHP Framework</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="http://cdn.sencha.com/ext/gpl/5.0.0/build/packages/ext-theme-neptune/build/resources/ext-theme-neptune-all.css">
+        <link rel="stylesheet" type="text/css" href="ext-6.2.0/build/classic/theme-neptune/resources/theme-neptune-all.css">
 
-        <script type="text/javascript" src="http://cdn.sencha.com/ext/gpl/5.0.0/build/ext-all.js"></script>
-        <script type="text/javascript" src="http://cdn.sencha.com/ext/gpl/5.0.0/build/packages/ext-theme-neptune/build/ext-theme-neptune.js"></script>
+        <script type="text/javascript" src="ext-6.2.0/build/ext-all-debug.js"></script>
+        <script type="text/javascript" src="ext-6.2.0/build/classic/theme-neptune/theme-neptune.js"></script>
 
       
         <script type ="text/javascript" src="bootstrap.js"></script>

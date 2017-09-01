@@ -1,5 +1,6 @@
 Ext.define('LibraryExt.view.BookCatalogView', {
-    extend: 'Ext.panel.Panel',
+    extend: 'Ext.panel.Panel',    
+    xtype: 'bookcatalogview',
     width: 500,
     height: 360,
     padding: 10,
@@ -21,9 +22,9 @@ Ext.define('LibraryExt.view.BookCatalogView', {
             collapsed: false
         },
         {
-            xtype: 'bookGridView',
+            xtype: 'bookGridView',            
             region: 'center'
-        }        
+        }
     ],
     renderTo: Ext.getBody()
 });

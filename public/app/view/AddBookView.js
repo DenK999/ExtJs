@@ -1,56 +1,66 @@
 Ext.define('LibraryExt.view.AddBookView', {
     extend: 'Ext.form.Panel',
-    alias: 'widget.addBookView',
-    xtype: 'formpanel',
-    id: 'addNewBookForm',
-    title: 'Add User',
+    alias: 'widget.saveBookView',
+    xtype: 'savebookform',
+    id: 'savebookform',
+    bind: {
+        title: '{title}'
+    },
     width: 300,
     height: 280,
     floating: true,
     centered: true,
-    closable: false,
     modal: true,
     buttons: [{
-            text: 'New Book',
-            action: 'addBook'            
+            text: 'Save',
+            action: 'saveBook'
         }, {
-            text: 'Cancel',            
+            text: 'Cancel',
             action: 'close'
         }],
     items: [{
+            hidden: true,
+            xtype: 'textfield',
+            name: 'id',
+            bind: '{book.id}'
+        }, {
             xtype: 'textfield',
             name: 'title',
             fieldLabel: 'Title',
             margin: '20 0 0 10',
-            vtype: 'alpha'
-
+            vtype: 'alpha',
+            bind: '{book.title}'
         }, {
             xtype: 'textfield',
             name: 'author',
             fieldLabel: 'Author',
             margin: '10 0 0 10',
-            vtype: 'alpha'
+            vtype: 'alpha',
+            bind: '{book.author}'
 
         }, {
             xtype: 'textfield',
             name: 'price',
             fieldLabel: 'Price',
             margin: '10 0 0 10',
-            //vtype: 'number'
+            bind: '{book.price}'
+                    //vtype: 'number'
 
         }, {
             xtype: 'textfield',
             name: 'year',
             fieldLabel: 'Year',
             margin: '10 0 0 10',
-            //vtype: 'number'
+            bind: '{book.year}'
+                    //vtype: 'number'
 
         }, {
             xtype: 'textfield',
             name: 'rating',
             fieldLabel: 'Rating',
             margin: '10 0 0 10',
-            //vtype: 'number'
+            bind: '{book.rating}'
+                    //vtype: 'number'
 
         }]
 });
