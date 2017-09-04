@@ -33,5 +33,10 @@ Ext.define('LibraryExt.view.BookAddPanel', {
                     enableToggle: true,
                     action: 'newBook'
                 }]
+        }, {
+            items: [{
+                    margin: '-1 0 0 1',                    
+                    xtype: 'bookMenuView'
+                }]
         }],
 });

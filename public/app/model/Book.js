@@ -25,11 +25,6 @@ Ext.define('LibraryExt.model.Book', {
     proxy: {
         type: 'ajax',
         url: 'index/test',
-//        reader: {
-//            type: 'json',
-//            root: 'books',
-//           
-//        }
     }
 });
 

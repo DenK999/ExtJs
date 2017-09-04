@@ -6,6 +6,7 @@ Ext.application({
         'BookAddPanel',
         'AddBookView',
         'BookCatalogView',
+        'BookMenuView'
     ],
 
     controllers: [
