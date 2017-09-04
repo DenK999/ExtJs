@@ -5,7 +5,7 @@ Ext.application({
         'BookGridView',
         'BookAddPanel',
         'AddBookView',
-        'BookCatalogView'
+        'BookCatalogView',
     ],
 
     controllers: [

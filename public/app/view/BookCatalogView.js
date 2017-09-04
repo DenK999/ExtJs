@@ -24,7 +24,7 @@ Ext.define('LibraryExt.view.BookCatalogView', {
         {
             xtype: 'bookGridView',
             region: 'center'
-        }
+        }      
     ],
     renderTo: Ext.getBody()
 });

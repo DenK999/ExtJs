@@ -56,5 +56,3 @@ Ext.define('LibraryExt.view.BookGridView', {
         }],
     selType: 'rowmodel'
 });
-
-

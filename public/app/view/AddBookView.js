@@ -6,11 +6,11 @@ Ext.define('LibraryExt.view.AddBookView', {
     bind: {
         title: '{title}'
     },
-    width: 300,
-    height: 280,
+    width: 300,   
     floating: true,
     centered: true,
     modal: true,
+    modelValidation: true,
     buttons: [{
             text: 'Save',
             action: 'saveBook'
@@ -27,7 +27,7 @@ Ext.define('LibraryExt.view.AddBookView', {
             xtype: 'textfield',
             name: 'title',
             fieldLabel: 'Title',
-            margin: '20 0 0 10',
+            margin: '15 0 0 10',
             vtype: 'alphanum',
             bind: '{book.title}'
         }, {
@@ -44,31 +44,34 @@ Ext.define('LibraryExt.view.AddBookView', {
             fieldLabel: 'Price',
             margin: '10 0 0 10',
             bind: '{book.price}',
-            vtype: 'number'
+            vtype: 'number',
+            msgTarget: 'under'
 
         }, {
             xtype: 'textfield',
             name: 'year',
             fieldLabel: 'Year',
             margin: '10 0 0 10',
-            bind: '{book.year}',
-            vtype: 'number'
+            bind: '{book.year}', 
+            msgTarget: 'under'
 
         }, {
             xtype: 'textfield',
             name: 'rating',
             fieldLabel: 'Rating',
-            margin: '10 0 0 10',
+            margin: '10 0 15 10',
             bind: '{book.rating}',
-            vtype: 'number'
+            vtype: 'number',
+            msgTarget: 'under'
 
         }]
 });
+
 Ext.apply(Ext.form.field.VTypes, {
     number: function (val, field) {
         var numberRegex = /^\d{1,4}$/;
         return numberRegex.test(val);
     },
-    numberText: 'Should be digits',
+    numberText: 'Should be digits from 1 to 4',
     numberMask: /[\d]/
 });

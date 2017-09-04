@@ -25,9 +25,9 @@ class IndexController extends ControllerBase {
         $book = Book::findFirst($id);
         if ($book !== false) {
             if ($book->delete() === false) {
-                return "User with title: " . $book->title . "don\'t delete";
+                return "Book with title: " . $book->title . "don\'t delete";
             } else {
-                return "User with id: " . $book->title . " deleted";
+                return "Book with id: " . $book->title . " deleted";
             }
         }
     }

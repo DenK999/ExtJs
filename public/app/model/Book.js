@@ -1,6 +1,8 @@
 Ext.define('LibraryExt.model.Book', {
     extend: 'Ext.data.Model',
-
+    requires: [
+        "LibraryExt.model.field.YearValidate"
+    ],
     fields: [{
             name: 'id',
             type: 'int'
@@ -15,7 +17,7 @@ Ext.define('LibraryExt.model.Book', {
             type: 'int'
         }, {
             name: 'year',
-            type: 'int'
+            type: 'yearValidate'
         }, {
             name: 'rating',
             type: 'int'
@@ -25,7 +27,7 @@ Ext.define('LibraryExt.model.Book', {
         url: 'index/test',
 //        reader: {
 //            type: 'json',
-//            root: 'users',
+//            root: 'books',
 //           
 //        }
     }
