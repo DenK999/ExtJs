@@ -23,8 +23,16 @@ Ext.define('LibraryExt.model.Book', {
             type: 'int'
         }],
     proxy: {
-        type: 'ajax',
-        url: 'index/test',
+        type: 'rest',
+        writeAllFields: true,
+        url: 'index/book',
+        reader: {
+                type: 'json',
+                rootProperty: 'data'
+            },
+            writer: {
+                type: 'json'
+            }
     }
 });
 

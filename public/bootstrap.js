@@ -4,7 +4,7 @@ Ext.application({
     views: [
         'BookGridView',
         'BookAddPanel',
-        'AddBookView',
+        'SaveBookForm',
         'BookCatalogView',
         'BookMenuView'
     ],

@@ -1,6 +1,6 @@
-Ext.define('LibraryExt.view.AddBookView', {
+Ext.define('LibraryExt.view.SaveBookForm', {
     extend: 'Ext.form.Panel',
-    alias: 'widget.saveBookView',
+    alias: 'widget.saveBookForm',
     xtype: 'savebookform',
     id: 'savebookform',
     bind: {

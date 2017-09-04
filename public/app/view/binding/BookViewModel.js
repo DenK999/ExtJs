@@ -1,9 +1,9 @@
-Ext.define('LibraryExt.view.binding.BookSessionModel', {
+Ext.define('LibraryExt.view.binding.BookViewModel', {
     extend: 'Ext.app.ViewModel',
     requires: [
         'LibraryExt.model.Book'
     ],
-    alias: 'viewmodel.binding.booksession',
+    alias: 'viewmodel.binding.bookviewmodel',
 
     stores: {
         books: {
