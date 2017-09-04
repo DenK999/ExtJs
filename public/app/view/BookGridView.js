@@ -3,8 +3,7 @@ Ext.define('LibraryExt.view.BookGridView', {
     uses: [
         'LibraryExt.view.binding.BookSessionModel'
     ],
-    alias: 'widget.bookGridView',
-    width: 400,
+    alias: 'widget.bookGridView',    
     height: 300,
     frame: true,
     xtype: 'bookGridView',
