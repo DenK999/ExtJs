@@ -1,6 +1,10 @@
 Ext.define('LibraryExt.view.SaveBookForm', {
     extend: 'Ext.form.Panel',
+    uses: [
+        'LibraryExt.controller.BookViewController'
+    ],
     alias: 'widget.saveBookForm',
+    controller: 'bookViewController',
     xtype: 'savebookform',
     id: 'savebookform',
     bind: {
@@ -13,7 +17,9 @@ Ext.define('LibraryExt.view.SaveBookForm', {
     modelValidation: true,
     buttons: [{
             text: 'Save',
-            action: 'saveBook'
+            listeners: {
+                    click: 'onSaveBookClick'
+                }
         }, {
             text: 'Cancel',
             action: 'close'

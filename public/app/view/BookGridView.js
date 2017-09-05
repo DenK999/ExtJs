@@ -1,19 +1,21 @@
 Ext.define('LibraryExt.view.BookGridView', {
     extend: 'Ext.grid.Panel',
     uses: [
-        'LibraryExt.view.binding.BookViewModel'
+        'LibraryExt.view.binding.BookViewModel',
+         'LibraryExt.controller.BookViewController'
     ],
-    alias: 'widget.bookGridView',    
+    alias: 'widget.bookGridView',
     height: 300,
     frame: true,
     xtype: 'bookGridView',
     reference: 'bookGridView',
+    controller: 'bookViewController',
     id: 'myGrid',
     session: true,
     viewModel: {
         type: 'binding.bookviewmodel'
     },
-    bind: '{books}',
+    bind: '{books}',    
     columns: [
         {
             text: 'Title',
@@ -43,13 +45,14 @@ Ext.define('LibraryExt.view.BookGridView', {
         }, {
             xtype: 'actioncolumn',
             width: 80,
-            text: 'Action',            
+            text: 'Action',
+            listeners: {
+                    click: 'onDeleteBookClick'
+                },
             items: [{
                     icon: 'img/del.png',                    
-                    handler: function(view, ri, ci, item, e, record) {
-                        view.getStore().remove( record );
-                    }
                 }]
         }],
+
     selType: 'rowmodel'
 });

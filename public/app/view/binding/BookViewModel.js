@@ -12,6 +12,7 @@ Ext.define('LibraryExt.view.binding.BookViewModel', {
             session: true
         }
     }
+    
 });
 
 

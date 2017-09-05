@@ -17,14 +17,13 @@ class IndexController extends ControllerBase {
                return $this->showBook();
                 break;
             case 'PUT':
-                echo 'pre';
-                var_dump($input);die;
+                return $this->updateBook($input);
                 break;
             case 'POST':                
                 return $this->createBook($input);                
                 break;
-            case 'DELETE':
-                return 'DELETE';
+            case 'DELETE':                
+                return $this->deleteBook($input);
                 break;
         }
     }
@@ -40,13 +39,13 @@ class IndexController extends ControllerBase {
         return $response;
     }
 
-    public function deleteBook($id) {
-        $book = Book::findFirst($id);
+    public function deleteBook($input) {
+        $book = Book::findFirst($input['id']);
         if ($book !== false) {
             if ($book->delete() === false) {
-                return "Book with title: " . $book->title . "don\'t delete";
+                return json_encode("Book with title: " . $book->title . "don\'t delete");
             } else {
-                return "Book with id: " . $book->title . " deleted";
+                return json_encode("Book with id: " . $book->title . " deleted");
             }
         }
     }
@@ -55,17 +54,18 @@ class IndexController extends ControllerBase {
 
         try {
             $book = Book::findFirst($bookData['id']);
-            if ($book !== false) {
+            if ($book !== false) {               
                 foreach ($bookData as $key => $value) {
                     $book->$key = $bookData[$key];
-                }
+                    
+                }                
                 $book->update();
-                return "Book with title: " . $book->title . " updating";
+                return json_encode("Book with title: " . $book->title . " updating");
             } else {
-                return "Book with title: " . $book->title . " don\'t updating";
+                return json_encode("Book with title: " . $book->title . " don\'t updating");
             }
         } catch (Exception $ex) {
-            return "Book don`t update";
+            return json_encode("Book don`t update");
         }
     }
 
