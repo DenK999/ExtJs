@@ -1,7 +1,10 @@
 Ext.define('LibraryExt.view.BookAddPanel', {
     extend: 'Ext.form.Panel',
+    uses: [
+        'LibraryExt.controller.BookViewController'
+    ],
     alias: 'widget.bookAddPanel',
-    controllers: 'BookController',
+    controller: 'bookViewController',
     bodyPadding: 10,
     frame: true,
     layout: 'column',
@@ -15,15 +18,17 @@ Ext.define('LibraryExt.view.BookAddPanel', {
             items: [{
                     xtype: 'textfield',
                     fieldLabel: 'Count Rows',
-                    name: 'count',
-                    id: 'count'
+                    name: 'countRow',
+                    id: 'countRow'
                 }]
         }, {
             items: [{
                     xtype: 'button',
                     text: 'Show',
                     enableToggle: true,
-                    action: 'show'
+                    listeners: {
+                        click: 'onShowCountRowClick'
+                    }
                 }]
         }, {
             items: [{
@@ -31,11 +36,13 @@ Ext.define('LibraryExt.view.BookAddPanel', {
                     text: 'New book',
                     margin: '0 0 0 1',
                     enableToggle: true,
-                    action: 'newBook'
+                    listeners: {
+                        click: 'onNewBookClick'
+                    }
                 }]
         }, {
             items: [{
-                    margin: '-1 0 0 1',                    
+                    margin: '-1 0 0 1',
                     xtype: 'bookMenuView'
                 }]
         }],

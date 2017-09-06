@@ -24,14 +24,14 @@ Ext.define('LibraryExt.view.BookCatalogView', {
                     xtype: 'bookGridView',
                     region: 'center'
                 }]
-        },{
+        }, {
             title: 'Contact Us',
-            items:[{
+            items: [{
                     xtype: 'panel',
                     html: '<div style="font: normal 18px cursive"><center><font size = "10">Contact Us</font></center></div>',
                     region: 'north',
                     height: 80
-            }]
+                }]
         }],
     renderTo: Ext.getBody()
 });

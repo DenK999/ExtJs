@@ -5,8 +5,8 @@ Ext.define('LibraryExt.view.SaveBookForm', {
     ],
     alias: 'widget.saveBookForm',
     controller: 'bookViewController',
-    xtype: 'savebookform',
-    id: 'savebookform',
+    xtype: 'saveBookForm',
+    id: 'saveBookForm',
     bind: {
         title: '{title}'
     },
@@ -22,7 +22,9 @@ Ext.define('LibraryExt.view.SaveBookForm', {
                 }
         }, {
             text: 'Cancel',
-            action: 'close'
+            listeners: {
+                    click: 'onCloseActiveWindowClick'
+                }
         }],
     items: [{
             hidden: true,
