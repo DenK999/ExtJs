@@ -10,7 +10,7 @@ Ext.define('LibraryExt.view.SaveBookForm', {
     bind: {
         title: '{title}'
     },
-    width: 300,   
+    width: 300,
     floating: true,
     centered: true,
     modal: true,
@@ -18,13 +18,13 @@ Ext.define('LibraryExt.view.SaveBookForm', {
     buttons: [{
             text: 'Save',
             listeners: {
-                    click: 'onSaveBookClick'
-                }
+                click: 'onSaveBookClick'
+            }
         }, {
             text: 'Cancel',
             listeners: {
-                    click: 'onCloseActiveWindowClick'
-                }
+                click: 'onCloseActiveWindowClick'
+            }
         }],
     items: [{
             hidden: true,
@@ -52,7 +52,6 @@ Ext.define('LibraryExt.view.SaveBookForm', {
             fieldLabel: 'Price',
             margin: '10 0 0 10',
             bind: '{book.price}',
-            vtype: 'number',
             msgTarget: 'under'
 
         }, {
@@ -60,7 +59,7 @@ Ext.define('LibraryExt.view.SaveBookForm', {
             name: 'year',
             fieldLabel: 'Year',
             margin: '10 0 0 10',
-            bind: '{book.year}', 
+            bind: '{book.year}',
             msgTarget: 'under'
 
         }, {
@@ -69,17 +68,7 @@ Ext.define('LibraryExt.view.SaveBookForm', {
             fieldLabel: 'Rating',
             margin: '10 0 15 10',
             bind: '{book.rating}',
-            vtype: 'number',
             msgTarget: 'under'
 
         }]
-});
-
-Ext.apply(Ext.form.field.VTypes, {
-    number: function (val, field) {
-        var numberRegex = /^\d{1,4}$/;
-        return numberRegex.test(val);
-    },
-    numberText: 'Should be digits from 1 to 4',
-    numberMask: /[\d]/
 });

@@ -9,8 +9,8 @@ Ext.application({
         'BookMenuView'
     ],
 
-    controllers: [
-        
+    controller: [
+        'BookViewController'
     ],
 
     launch: function () {

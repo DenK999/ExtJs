@@ -1,8 +1,7 @@
 Ext.define('LibraryExt.view.BookGridView', {
     extend: 'Ext.grid.Panel',
     uses: [
-        'LibraryExt.view.binding.BookViewModel',
-        'LibraryExt.controller.BookViewController'
+        'LibraryExt.view.binding.BookViewModel',       
     ],
     alias: 'widget.bookGridView',
     height: 300,

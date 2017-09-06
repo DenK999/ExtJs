@@ -1,8 +1,5 @@
 Ext.define('LibraryExt.view.BookAddPanel', {
-    extend: 'Ext.form.Panel',
-    uses: [
-        'LibraryExt.controller.BookViewController'
-    ],
+    extend: 'Ext.form.Panel',    
     alias: 'widget.bookAddPanel',
     controller: 'bookViewController',
     bodyPadding: 10,
